@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EF.Workshop": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

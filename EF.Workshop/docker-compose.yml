@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  ef.workshop:
+    container_name: EF_Workshop
+    image: ${DOCKER_REGISTRY-}efworkshop
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  postgres:
+    container_name: postgres_db
+    image: postgres:latest
+    environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+    ports:
+        - '5439:5432'
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+        PGADMIN_DEFAULT_EMAIL: admin@admin.com
+        PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
