@@ -27,5 +27,12 @@ namespace EF.WOrkshop.Persistence
                 ServiceLifetime.Transient);
 
         }
+
+        public static void MigrateDatabase(this ServiceProvider serviceProvider)
+        {
+            using var serviceScope = serviceProvider.GetService<IServiceScopeFactory>().CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
+            context.Database.Migrate();
+        }
     }
 }

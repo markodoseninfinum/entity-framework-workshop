@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.Workshop", "EF.Workshop.csproj", "{0560CD6A-89EF-4F56-A246-2A506127F96E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF.Workshop", "EF.Workshop.csproj", "{0560CD6A-89EF-4F56-A246-2A506127F96E}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A57A9A63-9351-4205-BA94-72340B01E1B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.WOrkshop.Persistence", "..\EF.WOrkshop.Persistence\EF.WOrkshop.Persistence.csproj", "{4F1851EC-102C-440B-94B9-657292096CA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF.Workshop.Persistence", "..\EF.WOrkshop.Persistence\EF.Workshop.Persistence.csproj", "{4F1851EC-102C-440B-94B9-657292096CA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

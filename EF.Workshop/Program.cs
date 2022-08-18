@@ -10,5 +10,9 @@ IConfiguration configuration = new ConfigurationBuilder()
 
 services.AddPersistence(configuration);
 
+services.BuildServiceProvider()
+    .MigrateDatabase();
+
+
 Console.WriteLine("Hello Workshop!");
 Console.Read();
