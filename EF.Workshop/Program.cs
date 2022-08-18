@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using EF.WOrkshop.Persistence;
+﻿using EF.WOrkshop.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
