@@ -8,7 +8,7 @@
         public Gender Gender { get; set; }
         public bool IsFriendly { get; set; }
         public int OwnerId { get; set; }
-        public Owner Owner { get; set; }
-        public ICollection<PetMedicine> Medicines { get; set; }
+        public virtual Owner Owner { get; set; }
+        public virtual ICollection<PetMedicine> Medicines { get; set; }
     }
 }
