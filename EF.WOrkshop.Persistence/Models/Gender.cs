@@ -1,4 +1,4 @@
-﻿namespace EF.WOrkshop.Persistence.Models
+﻿namespace EF.Workshop.Persistence.Models
 {
     public enum Gender
     {

@@ -1,4 +1,4 @@
-﻿using EF.WOrkshop.Persistence.Models;
+﻿using EF.Workshop.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EF.WOrkshop.Persistence
@@ -6,6 +6,7 @@ namespace EF.WOrkshop.Persistence
     public class AppDbContext : DbContext
     {
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<Owner> Owners { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -14,9 +15,17 @@ namespace EF.WOrkshop.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            ModelPetEntity(modelBuilder);
+            ModelOwnerEntity(modelBuilder);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        private static void ModelPetEntity(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Pet>()
-                .Property(p => p.Name)
-                .HasMaxLength(100);
+                            .Property(p => p.Name)
+                            .HasMaxLength(100);
 
             modelBuilder.Entity<Pet>()
                 .Property(p => p.BirthDate)
@@ -36,8 +45,21 @@ namespace EF.WOrkshop.Persistence
             modelBuilder.Entity<Pet>()
                 .Property(f => f.Id)
                 .ValueGeneratedOnAdd();
+        }
 
-            base.OnModelCreating(modelBuilder);
+        private void ModelOwnerEntity(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Owner>()
+                .Property(p => p.Name)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Owner>()
+                .OwnsOne(p => p.Address,
+                config =>
+                {
+                    config.Property(p => p.Street).HasMaxLength(50);
+                    config.Property(p => p.City).HasMaxLength(50);
+                });
         }
     }
 }
