@@ -8,5 +8,6 @@
         public Gender Gender { get; set; }
         public bool IsFriendly { get; set; }
         public Owner Owner { get; set; }
+        public ICollection<Medicine> Medicines { get; set; }
     }
 }
