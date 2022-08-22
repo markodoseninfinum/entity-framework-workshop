@@ -9,6 +9,6 @@
         public bool IsFriendly { get; set; }
         public int OwnerId { get; set; }
         public Owner Owner { get; set; }
-        public ICollection<Medicine> Medicines { get; set; }
+        public ICollection<PetMedicine> Medicines { get; set; }
     }
 }

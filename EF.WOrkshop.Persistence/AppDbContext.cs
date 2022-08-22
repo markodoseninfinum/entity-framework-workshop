@@ -7,6 +7,8 @@ namespace EF.WOrkshop.Persistence
     {
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Owner> Owners { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<PetMedicine> PetMedicines { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -17,6 +19,8 @@ namespace EF.WOrkshop.Persistence
         {
             ModelPetEntity(modelBuilder);
             ModelOwnerEntity(modelBuilder);
+            ModelMedicine(modelBuilder);
+            ModelPetMedicine(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -60,6 +64,32 @@ namespace EF.WOrkshop.Persistence
                     config.Property(p => p.Street).HasMaxLength(50);
                     config.Property(p => p.City).HasMaxLength(50);
                 });
+        }
+
+        private void ModelMedicine(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Medicine>()
+                .Property(p => p.Name)
+                .HasMaxLength(150);
+        }
+
+        private void ModelPetMedicine(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PetMedicine>()
+                .HasKey(p => new { p.MedicineId, p.PetId });
+
+            modelBuilder.Entity<PetMedicine>()
+                .HasOne(p => p.Pet)
+                .WithMany()
+                .HasForeignKey(p => p.PetId);
+
+            modelBuilder.Entity<PetMedicine>()
+                .HasOne(p => p.Medicine)
+                .WithMany()
+                .HasForeignKey(p => p.MedicineId);
+
+            modelBuilder.Entity<PetMedicine>()
+                .ToTable("MedicinePet");
         }
     }
 }
