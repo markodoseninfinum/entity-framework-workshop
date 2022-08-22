@@ -23,24 +23,9 @@ var dbContext = serviceProvider.GetService<AppDbContext>();
 
 Console.WriteLine("Hello Workshop!");
 
-dbContext.ChangeTracker.StateChanged += OnStateChanged;
+var pet = dbContext.Pets.FirstOrDefault();
 
-var pet = dbContext.Pets.AsNoTracking().FirstOrDefault();
-
-pet.Name = "Woof Woof";
-
-dbContext.SaveChanges();
-
-var updated = dbContext.Pets.FirstOrDefault();
-Console.WriteLine("Pet after update");
-SerializeAndWrite(updated);
-
-void OnStateChanged(object? sender, EntityStateChangedEventArgs e)
-{
-    Console.WriteLine("Entity changed!");
-    Console.WriteLine($"Old state: {e.OldState}, New state: {e.NewState}");
-    SerializeAndWrite(e.Entry.Entity);
-}
+SerializeAndWrite(pet);
 
 void SerializeAndWrite(object data)
 {

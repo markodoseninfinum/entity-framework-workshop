@@ -53,6 +53,9 @@ namespace EF.WOrkshop.Persistence
 
             modelBuilder.Entity<Pet>()
                 .HasData(MockData.GetPet());
+
+            modelBuilder.Entity<Pet>()
+                .HasQueryFilter(p => p.IsFriendly == false);
         }
 
         private void ModelOwnerEntity(ModelBuilder modelBuilder)
