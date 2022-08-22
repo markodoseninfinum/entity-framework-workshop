@@ -55,7 +55,13 @@ namespace EF.WOrkshop.Persistence
                 .HasQueryFilter(p => p.IsFriendly == false);
 
             modelBuilder.Entity<Dog>()
+                .ToTable("Dog");
+
+            modelBuilder.Entity<Dog>()
                 .HasData(MockData.GetDog());
+
+            modelBuilder.Entity<Cat>()
+                .ToTable("Cat");
 
             modelBuilder.Entity<Cat>()
                 .HasData(MockData.GetCat());
