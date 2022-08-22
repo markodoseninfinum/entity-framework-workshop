@@ -1,4 +1,5 @@
-﻿using EF.WOrkshop.Persistence;
+﻿using EF.Workshop.Persistence.Models;
+using EF.WOrkshop.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
@@ -23,9 +24,12 @@ var dbContext = serviceProvider.GetService<AppDbContext>();
 
 Console.WriteLine("Hello Workshop!");
 
-var pet = dbContext.Pets.FirstOrDefault();
+var pets = dbContext.Pets.ToList();
 
-SerializeAndWrite(pet);
+foreach (var pet in pets)
+{
+    SerializeAndWrite(pet);
+}
 
 void SerializeAndWrite(object data)
 {

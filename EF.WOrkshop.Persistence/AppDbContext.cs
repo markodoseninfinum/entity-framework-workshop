@@ -52,10 +52,13 @@ namespace EF.WOrkshop.Persistence
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Pet>()
-                .HasData(MockData.GetPet());
-
-            modelBuilder.Entity<Pet>()
                 .HasQueryFilter(p => p.IsFriendly == false);
+
+            modelBuilder.Entity<Dog>()
+                .HasData(MockData.GetDog());
+
+            modelBuilder.Entity<Cat>()
+                .HasData(MockData.GetCat());
         }
 
         private void ModelOwnerEntity(ModelBuilder modelBuilder)

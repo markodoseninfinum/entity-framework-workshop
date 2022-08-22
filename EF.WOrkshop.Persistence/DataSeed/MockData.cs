@@ -4,16 +4,31 @@ namespace EF.Workshop.Persistence.DataSeed
 {
     public static class MockData
     {
-        public static Pet GetPet()
+        public static Dog GetDog()
         {
-            return new Pet
+            return new Dog
             {
-                Id = 1,
+                Id = 3,
                 Name = "Dogo",
                 BirthDate = new DateTime(2022, 08, 01, 0, 0, 0, DateTimeKind.Utc),
                 Gender = Gender.Female,
                 IsFriendly = true,
-                OwnerId = 1
+                OwnerId = 1,
+                NumberOfGoodBoyPoints = 3,
+            };
+        }
+
+        public static Cat GetCat()
+        {
+            return new Cat
+            {
+                Id = 4,
+                Name = "Mjau mjau",
+                BirthDate = new DateTime(2022, 08, 01, 0, 0, 0, DateTimeKind.Utc),
+                Gender = Gender.Male,
+                IsFriendly = true,
+                OwnerId = 1,
+                NumberOfLifesUsed = 1,
             };
         }
 

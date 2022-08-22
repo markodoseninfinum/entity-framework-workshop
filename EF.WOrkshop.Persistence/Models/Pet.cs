@@ -1,6 +1,6 @@
 ﻿namespace EF.Workshop.Persistence.Models
 {
-    public class Pet
+    public abstract class Pet
     {
         public int Id { get; set; }
         public string Name { get; set; }
