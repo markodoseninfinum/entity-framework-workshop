@@ -1,5 +1,6 @@
 ﻿using EF.WOrkshop.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
@@ -22,23 +23,24 @@ var dbContext = serviceProvider.GetService<AppDbContext>();
 
 Console.WriteLine("Hello Workshop!");
 
+dbContext.ChangeTracker.StateChanged += OnStateChanged;
 
-//var pets = dbContext.Pets.ToList();
-//var owner = dbContext.Owners.FirstOrDefault(o => o.Name == "Marko Dosen");
+var pet = dbContext.Pets.AsNoTracking().FirstOrDefault();
 
-//SerializeAndWrite(pets);
-//SerializeAndWrite(owner);
+pet.Name = "Woof Woof";
 
-//dbContext.ChangeTracker.LazyLoadingEnabled = false;
+dbContext.SaveChanges();
 
-var pet = dbContext.Pets.FirstOrDefault();
+var updated = dbContext.Pets.FirstOrDefault();
+Console.WriteLine("Pet after update");
+SerializeAndWrite(updated);
 
-var ownerName = pet?.Owner?.Name;
-
-SerializeAndWrite(pet);
-SerializeAndWrite($"Owner name: {ownerName}");
-//Console.Read();
-
+void OnStateChanged(object? sender, EntityStateChangedEventArgs e)
+{
+    Console.WriteLine("Entity changed!");
+    Console.WriteLine($"Old state: {e.OldState}, New state: {e.NewState}");
+    SerializeAndWrite(e.Entry.Entity);
+}
 
 void SerializeAndWrite(object data)
 {
