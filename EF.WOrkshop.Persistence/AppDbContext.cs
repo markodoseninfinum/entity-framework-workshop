@@ -1,4 +1,5 @@
-﻿using EF.Workshop.Persistence.Models;
+﻿using EF.Workshop.Persistence.DataSeed;
+using EF.Workshop.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EF.WOrkshop.Persistence
@@ -49,6 +50,9 @@ namespace EF.WOrkshop.Persistence
             modelBuilder.Entity<Pet>()
                 .Property(f => f.Id)
                 .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Pet>()
+                .HasData(MockData.GetPet());
         }
 
         private void ModelOwnerEntity(ModelBuilder modelBuilder)
@@ -63,7 +67,8 @@ namespace EF.WOrkshop.Persistence
                 {
                     config.Property(p => p.Street).HasMaxLength(50);
                     config.Property(p => p.City).HasMaxLength(50);
-                });
+                })
+                .HasData(MockData.GetOwner());
         }
 
         private void ModelMedicine(ModelBuilder modelBuilder)
@@ -71,6 +76,9 @@ namespace EF.WOrkshop.Persistence
             modelBuilder.Entity<Medicine>()
                 .Property(p => p.Name)
                 .HasMaxLength(150);
+
+            modelBuilder.Entity<Medicine>()
+                .HasData(MockData.GetMedicine());
         }
 
         private void ModelPetMedicine(ModelBuilder modelBuilder)
@@ -90,6 +98,9 @@ namespace EF.WOrkshop.Persistence
 
             modelBuilder.Entity<PetMedicine>()
                 .ToTable("MedicinePet");
+
+            modelBuilder.Entity<PetMedicine>()
+                .HasData(MockData.GetPetMedicine());
         }
     }
 }
