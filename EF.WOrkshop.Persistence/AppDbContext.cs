@@ -51,9 +51,6 @@ namespace EF.WOrkshop.Persistence
                 .Property(f => f.Id)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<Pet>()
-                .HasQueryFilter(p => p.IsFriendly == false);
-
             modelBuilder.Entity<Dog>()
                 .HasData(MockData.GetDog());
 
