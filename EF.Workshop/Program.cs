@@ -28,6 +28,10 @@ var pet = dbContext.Pets.FirstOrDefault();
 
 SerializeAndWrite(pet);
 
+//dbContext.Entry(pet)
+//    .Reference(p => p.Owner)
+//    .Load();
+
 var ownerName = pet?.Owner?.Name;
 
 SerializeAndWrite($"Owner name: {ownerName}");
