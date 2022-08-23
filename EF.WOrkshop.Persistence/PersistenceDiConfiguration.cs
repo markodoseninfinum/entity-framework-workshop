@@ -14,7 +14,9 @@ namespace EF.WOrkshop.Persistence
 
             services.AddDbContext<AppDbContext>(
                 options =>
-                options.UseNpgsql(
+                options
+                    .UseLazyLoadingProxies()
+                    .UseNpgsql(
                         connectionString,
                         sqlOptions =>
                         {

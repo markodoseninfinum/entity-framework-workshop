@@ -22,22 +22,15 @@ var dbContext = serviceProvider.GetService<AppDbContext>();
 
 Console.WriteLine("Hello Workshop!");
 
-
-//var pets = dbContext.Pets.ToList();
-//var owner = dbContext.Owners.FirstOrDefault(o => o.Name == "Marko Dosen");
-
-//SerializeAndWrite(pets);
-//SerializeAndWrite(owner);
-
 //dbContext.ChangeTracker.LazyLoadingEnabled = false;
 
 var pet = dbContext.Pets.FirstOrDefault();
 
+SerializeAndWrite(pet);
+
 var ownerName = pet?.Owner?.Name;
 
-SerializeAndWrite(pet);
 SerializeAndWrite($"Owner name: {ownerName}");
-//Console.Read();
 
 
 void SerializeAndWrite(object data)
