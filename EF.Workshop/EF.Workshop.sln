@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF.Workshop", "EF.Workshop.
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A57A9A63-9351-4205-BA94-72340B01E1B6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF.Workshop.Persistence", "..\EF.WOrkshop.Persistence\EF.Workshop.Persistence.csproj", "{4F1851EC-102C-440B-94B9-657292096CA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF.WOrkshop.Persistence", "..\EF.WOrkshop.Persistence\EF.WOrkshop.Persistence.csproj", "{4F1851EC-102C-440B-94B9-657292096CA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
