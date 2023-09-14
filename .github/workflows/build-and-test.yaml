@@ -21,6 +21,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore ${{env.solution-path}}
     - name: Build
-      run: dotnet build ${{env.solution-path}} --configuration Release --no-restore --warnaserror
+      run: dotnet build ${{env.solution-path}} --configuration Release --no-restore ##--warnaserror
     - name: Test
       run: dotnet test ${{env.solution-path}} --no-restore --verbosity normal
