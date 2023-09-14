@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EF.WOrkshop.Persistence\EF.Workshop.Persistence.csproj" />
+    <ProjectReference Include="..\EF.WOrkshop.Persistence\EF.WOrkshop.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
