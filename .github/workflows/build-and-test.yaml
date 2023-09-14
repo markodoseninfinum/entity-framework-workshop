@@ -16,13 +16,13 @@ jobs:
       uses: actions/checkout@v4
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3
-    - name: Setup NuGet
-      uses: nuget/setup-nuget@v1
-      with:
-        dotnet-version: '${{ matrix.dotnet-version }}'
     - name: Install dependencies
       run: dotnet restore ./EF.Workshop/EF.Workshop.sln
     - name: Build
       run: dotnet build ./EF.Workshop/EF.Workshop.sln --configuration Release --no-restore ##--warnaserror
     - name: Test
-      run: dotnet test ./EF.Workshop/EF.Workshop.sln --no-restore --verbosity normal
+      run: dotnet test ./EF.Workshop/EF.Workshop.sln --no-restore --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+    - name: Test Code Coverage
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: coverage/**/coverage.cobertura.xml
