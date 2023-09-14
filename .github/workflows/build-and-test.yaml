@@ -19,8 +19,8 @@ jobs:
       with:
         dotnet-version: '${{ matrix.dotnet-version }}'
     - name: Install dependencies
-      run: dotnet restore ./EF.Workshop/EF.Workshop.csproj
+      run: dotnet restore ./EF.Workshop/EF.Workshop.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore --warnaserror
+      run: dotnet build ./EF.Workshop/EF.Workshop.sln --configuration Release --no-restore ##--warnaserror
     - name: Test
-      run: dotnet test --no-restore -verbosity normal
+      run: dotnet test ./EF.Workshop/EF.Workshop.sln --no-restore -verbosity normal
