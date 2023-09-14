@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build ./EF.Workshop/EF.Workshop.sln --configuration Release --no-restore ##--warnaserror
     - name: Test
-      run: dotnet test ./EF.Workshop/EF.Workshop.sln --no-restore -verbosity normal
+      run: dotnet test ./EF.Workshop/EF.Workshop.sln --no-restore --verbosity normal
