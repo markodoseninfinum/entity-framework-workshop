@@ -24,11 +24,11 @@ jobs:
       uses: actions/setup-dotnet@v3
 
     - name: Install EF tools
+      if: env.enable-migration-bundle
       run: |
            dotnet new tool-manifest
            dotnet tool install --global dotnet-ef
-      if: env.enable-migration-bundle
-
+      
     - name: Install dependencies
       run: dotnet restore ${{env.solution-path}}
 
@@ -39,9 +39,9 @@ jobs:
       run: dotnet test ${{env.solution-path}} --no-restore --verbosity normal
 
     - name: Create Migration Bundle
-      run: migrations bundle --project ${{env.db-project-path}} --startup-project $${{env.startup-project-path}} --output ./migrationbundle --self-contained
       if: env.enable-migration-bundle
+      run: migrations bundle --project ${{env.db-project-path}} --startup-project $${{env.startup-project-path}} --output ./migrationbundle --self-contained
 
     - name: Run Migration Bundle
-      run: ./migrationbundle/efbundle.exe
       if: env.enable-migration-bundle
+      run: ./migrationbundle/efbundle.exe
