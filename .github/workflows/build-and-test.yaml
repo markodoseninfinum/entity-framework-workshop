@@ -1,6 +1,9 @@
 name: Build and Test
 env:
   solution-path: './EF.Workshop/EF.Workshop.sln' ##solution path placeholder
+  migration-bundle: false
+  db-project-path: './EF.Workshop/EF.WorkshopDb.csproj' ##path to project containing DbContext
+  startup-project-path: './EF.Workshop/EF.WorkshopApi.csproj' ##path to startup project
 on:
   push:
   pull_request:
@@ -16,11 +19,26 @@ jobs:
     steps:
     - name: GitHub checkout
       uses: actions/checkout@v4
+
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3
+
+    - name: Install EF tools
+      run: |
+           dotnet new tool-manifest
+           dotnet tool install --global dotnet-ef
+
     - name: Install dependencies
       run: dotnet restore ${{env.solution-path}}
+
     - name: Build
       run: dotnet build ${{env.solution-path}} --configuration Release --no-restore ##--warnaserror
+
     - name: Test
       run: dotnet test ${{env.solution-path}} --no-restore --verbosity normal
+
+    - name: Create Migration Bundle
+      run: migrations bundle --project ${{env.db-project-path}} --startup-project $${{env.startup-project-path}} --output ./migrationbundle --self-contained
+
+    - name: Run Migration Bundle
+      run: ./migrationbundle/efbundle.exe
