@@ -1,7 +1,7 @@
 name: Build and Test
 env:
   solution-path: './EF.Workshop/EF.Workshop.sln' ##solution path placeholder
-  migration-bundle: false
+  enable-migration-bundle: ${{ false }}
   db-project-path: './EF.Workshop/EF.WorkshopDb.csproj' ##path to project containing DbContext
   startup-project-path: './EF.Workshop/EF.WorkshopApi.csproj' ##path to startup project
 on:
@@ -27,6 +27,7 @@ jobs:
       run: |
            dotnet new tool-manifest
            dotnet tool install --global dotnet-ef
+      if: enable-migration-bundle
 
     - name: Install dependencies
       run: dotnet restore ${{env.solution-path}}
@@ -39,6 +40,8 @@ jobs:
 
     - name: Create Migration Bundle
       run: migrations bundle --project ${{env.db-project-path}} --startup-project $${{env.startup-project-path}} --output ./migrationbundle --self-contained
+      if: enable-migration-bundle
 
     - name: Run Migration Bundle
       run: ./migrationbundle/efbundle.exe
+      if: enable-migration-bundle
