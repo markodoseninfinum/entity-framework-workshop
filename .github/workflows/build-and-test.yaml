@@ -1,7 +1,7 @@
 name: Build and Test
 env:
   solution-path: './EF.Workshop/EF.Workshop.sln' ##solution path placeholder
-  enable-migration-bundle: ${{ false }}
+  enable-migration-bundle: ${{ false }} ## indicate if migration boundle should be run
   db-project-path: './EF.Workshop/EF.WorkshopDb.csproj' ##path to project containing DbContext
   startup-project-path: './EF.Workshop/EF.WorkshopApi.csproj' ##path to startup project
 on:
@@ -23,8 +23,8 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3
 
-    - name: Install EF tools
-      if: env.enable-migration-bundle
+    - if: env.enable-migration-bundle ==  true
+      name: Install EF tools
       run: |
            dotnet new tool-manifest
            dotnet tool install --global dotnet-ef
@@ -38,10 +38,10 @@ jobs:
     - name: Test
       run: dotnet test ${{env.solution-path}} --no-restore --verbosity normal
 
-    - name: Create Migration Bundle
-      if: env.enable-migration-bundle
+    - if: env.enable-migration-bundle ==  true
+      name: Create Migration Bundle
       run: migrations bundle --project ${{env.db-project-path}} --startup-project $${{env.startup-project-path}} --output ./migrationbundle --self-contained
 
-    - name: Run Migration Bundle
-      if: env.enable-migration-bundle
+    - if: env.enable-migration-bundle ==  true
+      name: Run Migration Bundle
       run: ./migrationbundle/efbundle.exe
